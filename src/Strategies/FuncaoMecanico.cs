@@ -1,10 +1,10 @@
 using spaceship_command_center.src.Abstractions;
 using spaceship_command_center.src.Models;
 
-namespace spaceship_command_center.src.States
+namespace spaceship_command_center.src.Strategies
 {
     /// <summary>
-    /// Estado concreto que representa a função de mecânico.
+    /// Estratégia concreta que representa a função de mecânico.
     /// </summary>
     public class FuncaoMecanico : IFuncaoTripulante
     {

@@ -1,13 +1,13 @@
 using spaceship_command_center.src.Abstractions;
 using spaceship_command_center.src.Models;
 
-namespace spaceship_command_center.src.States
+namespace spaceship_command_center.src.Strategies
 {
     /// <summary>
-    /// Estado concreto que representa a função ociosa (sem atividade).
+    /// Estratégia concreta que representa a função ociosa (sem atividade).
     /// </summary>
     /// <remarks>
-    /// Utilizado como estado padrão do tripulante quando nenhuma função está definida.
+    /// Utilizado como função padrão do tripulante quando nenhuma atividade está definida.
     /// </remarks>
     public class FuncaoOcioso : IFuncaoTripulante
     {

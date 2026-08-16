@@ -1,8 +1,8 @@
 ﻿using spaceship_command_center.src.Commands;
 using spaceship_command_center.src.Invokers;
 using spaceship_command_center.src.Models;
-using spaceship_command_center.src.Registers;
-using spaceship_command_center.src.States;
+using spaceship_command_center.src.Services;
+using spaceship_command_center.src.Strategies;
 
 var nucleo = new Nucleo(100, 20);
 var escudo = new SistemaEscudo();
@@ -18,12 +18,12 @@ registro.RegistrarFuncao("ocioso", new FuncaoOcioso());
 registro.RegistrarFuncao("mecanico", new FuncaoMecanico());
 registro.RegistrarFuncao("artilheiro", new FuncaoArtilheiro());
 
-var tripulanteMercy = new Tripulante("Mercy", registro);
+var tripulanteMercy = new Tripulante("Mercy");
 
 var gerenciador = new GerenciadorComandos();
 
 gerenciador.RegistrarComando("tomar_dano", new ComandoTomarDano(nucleo));
-gerenciador.RegistrarComando("trocar_funcao", new ComandoTrocarFuncao(tripulanteMercy));
+gerenciador.RegistrarComando("trocar_funcao", new ComandoTrocarFuncao(tripulanteMercy, registro));
 gerenciador.RegistrarComando("trabalhar", new ComandoTrabalhar(tripulanteMercy));
 
 Console.WriteLine("=== Spaceship Command Center ===");
