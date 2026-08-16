@@ -1,13 +1,30 @@
 namespace spaceship_command_center.src.Models
 {
+    /// <summary>
+    /// Gerencia a energia do núcleo da nave. Atua como Subject no padrão Observer.
+    /// </summary>
+    /// <remarks>
+    /// Dispara o evento <see cref="AoEntrarEmCrise"/> quando a energia atinge o nível crítico.
+    /// A notificação ocorre apenas uma vez por ciclo de crise.
+    /// </remarks>
     public class Nucleo(int energia, int nivelCritico)
     {
+        /// <summary>
+        /// Energia atual do núcleo.
+        /// </summary>
         public int Energia { get; private set; } = energia;
         private readonly int _nivelCritico = nivelCritico;
         private bool _emNivelCritico;
 
+        /// <summary>
+        /// Evento disparado quando a energia atinge o nível crítico.
+        /// </summary>
         public event Action? AoEntrarEmCrise;
 
+        /// <summary>
+        /// Aplica dano ao núcleo e verifica se entrou em estado crítico.
+        /// </summary>
+        /// <param name="dano">Quantidade de dano.</param>
         public void TomarDano(int dano)
         {
             if (Energia <= 0)

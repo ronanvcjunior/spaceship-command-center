@@ -1,12 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace spaceship_command_center.src.Abstractions
 {
-    public interface  IComando
+    /// <summary>
+    /// Contrato para todos os comandos do sistema (Command Pattern).
+    /// </summary>
+    public interface IComando
     {
+        /// <summary>
+        /// Executa a ação do comando.
+        /// </summary>
+        /// <param name="args">Argumentos do comando.</param>
         void Executar(string[] args);
     }
 }

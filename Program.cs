@@ -15,7 +15,7 @@ var gerenciador = new GerenciadorComandos();
 
 gerenciador.RegistrarComando("tomar_dano", new ComandoTomarDano(nucleo));
 
- Console.WriteLine("=== Spaceship Command Center ===");
+Console.WriteLine("=== Spaceship Command Center ===");
 Console.WriteLine("Comandos disponíveis:");
 Console.WriteLine("  tomar_dano <valor>   - Aplica dano ao núcleo");
 Console.WriteLine("----------------------------");
