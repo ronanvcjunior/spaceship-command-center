@@ -5,14 +5,14 @@ namespace spaceship_command_center.src.Models
 {
     public class Nave : INave
     {
-        private IArma _arma = new ArmaVazio();
+        public IArma Arma { get; private set; } = new ArmaVazio();
 
         public void EquiparArma(IArma arma)
         {
-            _arma = arma;
-            Console.WriteLine($"[Nave] {_arma.Nome} equipado(a) com sucesso.");
+            Arma = arma;
+            Console.WriteLine($"[Nave] {Arma.Nome} equipado(a) com sucesso.");
         }
 
-        public void Atirar() => _arma.Atirar();
+        public void Atirar() => Arma.Atirar();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using spaceship_command_center.src.Commands;
+using spaceship_command_center.src.Decorators;
 using spaceship_command_center.src.Invokers;
 using spaceship_command_center.src.Models;
 using spaceship_command_center.src.Services;
@@ -27,6 +28,10 @@ registroArmamentos.RegistrarArma("misseis", new ArmaMisseis());
 
 var nave = new Nave();
 
+var registroModificadores = new ModificadorRegistro();
+registroModificadores.RegistrarModificador("fogo", arma => new ModificadorFogo(arma));
+registroModificadores.RegistrarModificador("perfuracao", arma => new ModificadorPerfuracao(arma));
+
 var gerenciador = new GerenciadorComandos();
 
 gerenciador.RegistrarComando("tomar_dano", new ComandoTomarDano(nucleo));
@@ -34,14 +39,16 @@ gerenciador.RegistrarComando("trocar_funcao", new ComandoTrocarFuncao(tripulante
 gerenciador.RegistrarComando("trabalhar", new ComandoTrabalhar(tripulanteMercy));
 gerenciador.RegistrarComando("equipar_arma", new ComandoEquiparArma(nave, registroArmamentos));
 gerenciador.RegistrarComando("atirar", new ComandoAtirar(nave));
+gerenciador.RegistrarComando("adicionar_modificador", new ComandoAdicionarModificador(nave, registroModificadores));
 
 Console.WriteLine("=== Spaceship Command Center ===");
 Console.WriteLine("Comandos disponíveis:");
-Console.WriteLine("  tomar_dano <valor>                 - Aplica dano ao núcleo");
-Console.WriteLine($"  trocar_funcao <funcao>             - Define a função do tripulante ({string.Join(", ", registroFuncoes.ListarNomes())})");
-Console.WriteLine("  trabalhar                          - Dita o tripulante a executar o trabalho");
-Console.WriteLine($"  equipar_arma <armamento>       - Define o armamento da nave ({string.Join(", ", registroArmamentos.ListarNomes())})");
-Console.WriteLine("  atirar                          - Dita a nave a atirar");
+Console.WriteLine("  tomar_dano <valor>                     - Aplica dano ao núcleo");
+Console.WriteLine($"  trocar_funcao <funcao>                 - Define a função do tripulante ({string.Join(", ", registroFuncoes.ListarNomes())})");
+Console.WriteLine("  trabalhar                              - Dita o tripulante a executar o trabalho");
+Console.WriteLine($"  equipar_arma <arma>                    - Define o arma da nave ({string.Join(", ", registroArmamentos.ListarNomes())})");
+Console.WriteLine($"  adicionar_modificador <modificador>    - adiciona modificador na arma ({string.Join(", ", registroModificadores.ListarNomes())})");
+Console.WriteLine("  atirar                                 - Dita a nave a atirar");
 Console.WriteLine("----------------------------");
 
 while (true)
