@@ -1,14 +1,20 @@
-
 using spaceship_command_center.src.Abstractions;
 using spaceship_command_center.src.Services;
 
 namespace spaceship_command_center.src.Commands
 {
+    /// <summary>
+    /// Comando para equipar uma arma na nave a partir do registro de armas disponíveis.
+    /// </summary>
     public class ComandoEquiparArma(INave nave, ArmaRegistro registro) : IComando
     {
         private readonly INave _nave = nave;
         private readonly ArmaRegistro _registro = registro;
 
+        /// <summary>
+        /// Executa o comando, obtendo a arma pelo nome e equipando-a na nave.
+        /// </summary>
+        /// <param name="args">Argumentos: [0] = nome da arma (ex: "laser").</param>
         public void Executar(string[] args)
         {
             if (args.Length == 0)
