@@ -1,6 +1,7 @@
 ﻿using spaceship_command_center.src.Commands;
 using spaceship_command_center.src.Invokers;
 using spaceship_command_center.src.Models;
+using spaceship_command_center.src.Registers;
 using spaceship_command_center.src.States;
 
 var nucleo = new Nucleo(100, 20);
@@ -12,15 +13,24 @@ nucleo.AoEntrarEmCrise += escudo.ReagirACrise;
 nucleo.AoEntrarEmCrise += iluminacao.ReagirACrise;
 nucleo.AoEntrarEmCrise += painel.ReagirACrise;
 
-var tripulanteMercy = new Tripulante("Mercy");
+var registro = new EstadoTripulanteRegistro();
+registro.RegistrarEstado("ocioso", new EstadoOcioso());
+registro.RegistrarEstado("mecanico", new EstadoMecanico());
+registro.RegistrarEstado("artilheiro", new EstadoArtilheiro());
+
+var tripulanteMercy = new Tripulante("Mercy", registro);
 
 var gerenciador = new GerenciadorComandos();
 
 gerenciador.RegistrarComando("tomar_dano", new ComandoTomarDano(nucleo));
+gerenciador.RegistrarComando("trocar_funcao", new ComandoTrocarFuncao(tripulanteMercy));
+gerenciador.RegistrarComando("trabalhar", new ComandoTrabalhar(tripulanteMercy));
 
 Console.WriteLine("=== Spaceship Command Center ===");
 Console.WriteLine("Comandos disponíveis:");
-Console.WriteLine("  tomar_dano <valor>   - Aplica dano ao núcleo");
+Console.WriteLine("  tomar_dano <valor>         - Aplica dano ao núcleo");
+Console.WriteLine($"  trocar_funcao <funcao>     - Define a função do tripulante ({string.Join(", ", registro.ListarNomes())})");
+Console.WriteLine("  trabalhar                  - Dita o tripulante a executar o trabalho");
 Console.WriteLine("----------------------------");
 
 while (true)
