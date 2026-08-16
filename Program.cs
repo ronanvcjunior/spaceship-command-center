@@ -1,6 +1,7 @@
 ﻿using spaceship_command_center.src.Commands;
 using spaceship_command_center.src.Invokers;
 using spaceship_command_center.src.Models;
+using spaceship_command_center.src.States;
 
 var nucleo = new Nucleo(100, 20);
 var escudo = new SistemaEscudo();
@@ -10,6 +11,8 @@ var painel = new PainelNavegacao();
 nucleo.AoEntrarEmCrise += escudo.ReagirACrise;
 nucleo.AoEntrarEmCrise += iluminacao.ReagirACrise;
 nucleo.AoEntrarEmCrise += painel.ReagirACrise;
+
+var tripulanteMercy = new Tripulante("Mercy");
 
 var gerenciador = new GerenciadorComandos();
 
