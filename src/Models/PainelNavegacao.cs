@@ -1,11 +1,9 @@
-using spaceship_command_center.src.Abstractions;
-
 namespace spaceship_command_center.src.Models
 {
     /// <summary>
-    /// Observer concreto. Exibe alertas no painel de navegação durante a crise.
+    /// Reage à crise exibindo alertas no painel de navegação.
     /// </summary>
-    public class PainelNavegacao : IObservadorCrise
+    public class PainelNavegacao
     {
         /// <summary>
         /// Exibe alertas visuais no painel quando a crise é detectada.

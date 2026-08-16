@@ -1,11 +1,9 @@
-using spaceship_command_center.src.Abstractions;
-
 namespace spaceship_command_center.src.Models
 {
     /// <summary>
-    /// Observer concreto. Gerencia a iluminação da nave durante a crise.
+    /// Reage à crise ativando a iluminação de emergência.
     /// </summary>
-    public class SistemaIluminacao : IObservadorCrise
+    public class SistemaIluminacao
     {
         /// <summary>
         /// Apaga as luzes principais e ativa a iluminação de emergência.
