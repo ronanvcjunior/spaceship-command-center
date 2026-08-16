@@ -13,10 +13,10 @@ nucleo.AoEntrarEmCrise += escudo.ReagirACrise;
 nucleo.AoEntrarEmCrise += iluminacao.ReagirACrise;
 nucleo.AoEntrarEmCrise += painel.ReagirACrise;
 
-var registro = new EstadoTripulanteRegistro();
-registro.RegistrarEstado("ocioso", new EstadoOcioso());
-registro.RegistrarEstado("mecanico", new EstadoMecanico());
-registro.RegistrarEstado("artilheiro", new EstadoArtilheiro());
+var registro = new FuncaoTripulanteRegistro();
+registro.RegistrarFuncao("ocioso", new FuncaoOcioso());
+registro.RegistrarFuncao("mecanico", new FuncaoMecanico());
+registro.RegistrarFuncao("artilheiro", new FuncaoArtilheiro());
 
 var tripulanteMercy = new Tripulante("Mercy", registro);
 
