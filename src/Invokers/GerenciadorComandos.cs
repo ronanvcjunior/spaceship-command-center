@@ -3,45 +3,56 @@ using spaceship_command_center.src.Abstractions;
 namespace spaceship_command_center.src.Invokers
 {
     /// <summary>
-    /// Invoker do padrão Command. Registra e executa comandos via dicionário.
+    /// Invoker do padrão Command.
+    /// Registra, localiza e executa comandos através de um dicionário.
     /// </summary>
     public class GerenciadorComandos
     {
-        private readonly Dictionary<string, IComando> _comandos = new();
+        private readonly Dictionary<string, DefinicaoComando> _comandos = new();
 
         /// <summary>
-        /// Registra um comando associado a um nome.
+        /// Registra um comando associado a um nome e uma descrição.
         /// </summary>
-        /// <param name="nome">Nome do comando (ex: "tomar_dano").</param>
+        /// <param name="nome">Nome utilizado para executar o comando.</param>
         /// <param name="comando">Instância do comando.</param>
-        public void RegistrarComando(string nome, IComando comando)
+        /// <param name="descricao">Descrição exibida pelo comando de ajuda.</param>
+        public void RegistrarComando(string nome, IComando comando, string descricao)
         {
-            _comandos[nome] = comando;
+            _comandos[nome] = new DefinicaoComando(
+                comando,
+                descricao);
         }
 
         /// <summary>
         /// Executa um comando pelo nome.
         /// </summary>
         /// <param name="nome">Nome do comando.</param>
-        /// <param name="args">Argumentos para o comando.</param>
-        /// <returns>True se encontrado e executado; False caso contrário.</returns>
+        /// <param name="args">Argumentos fornecidos pelo usuário.</param>
+        /// <returns>
+        /// True se o comando foi encontrado e executado;
+        /// False caso o comando não esteja registrado.
+        /// </returns>
         public bool ExecutarComando(string nome, string[] args)
         {
-            if (_comandos.TryGetValue(nome, out IComando? comando))
+            if (_comandos.TryGetValue(nome, out DefinicaoComando? definicao))
             {
-                comando.Executar(args);
+                definicao.Comando.Executar(args);
                 return true;
             }
+
             return false;
         }
 
         /// <summary>
-        /// Lista os nomes dos comandos registrados em ordem alfabética.
+        /// Retorna os comandos registrados em ordem alfabética.
         /// </summary>
-        /// <returns>Lista ordenada de nomes de comandos.</returns>
-        public IEnumerable<string> ListarComandos()
-        {
-            return _comandos.Keys.OrderBy(k => k);
-        }
+        /// <returns>Lista ordenada com os nomes dos comandos.</returns>
+        public IEnumerable<string> ListarComandos() => _comandos.Keys.OrderBy(nome => nome);
+
+        /// <summary>
+        /// Retorna as definições dos comandos registrados em ordem alfabética.
+        /// </summary>
+        /// <returns>Lista ordenada das definições dos comandos.</returns>
+        public IEnumerable<DefinicaoComando> ListarDefinicoes() => _comandos.OrderBy(par => par.Key).Select(par => par.Value);
     }
 }

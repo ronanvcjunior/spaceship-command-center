@@ -1,7 +1,8 @@
 namespace spaceship_command_center.src.Abstractions
 {
     /// <summary>
-    /// Contrato para as armas equipáveis na nave (Strategy Pattern).
+    /// Contrato para componentes de armamento da nave.
+    /// É utilizado pelas armas base e pelos decorators de arma.
     /// </summary>
     public interface IArma
     {

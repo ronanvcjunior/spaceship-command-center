@@ -33,6 +33,12 @@ namespace spaceship_command_center.src.Models
                 return;
             }
 
+            if (dano <= 0)
+            {
+                Console.WriteLine("[Núcleo] O dano deve ser maior que zero.");
+                return;
+            }
+
             Energia = Math.Max(0, Energia - dano);
             Console.WriteLine($"[Núcleo] Energia atual: {Energia}%.");
 
